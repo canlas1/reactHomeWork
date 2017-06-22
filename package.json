@@ -1,7 +1,7 @@
 {
-  "name": "reacthomework",
-  "version": "1.0.1",
-  "description": "testing v1",
+  "name": "dennisNYTreact",
+  "version": "1.0.0",
+  "description": "",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.15.1",
@@ -22,10 +22,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "webpack & node server.js",
     "build": "webpack -w",
     "dev": "webpack & node server.js"
   },
-  "author": "Dennis",
+  "author": "",
   "license": "ISC"
 }

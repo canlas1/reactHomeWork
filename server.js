@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 const Article = require("./models/Article.js");
-const PORT = 8080 || process.env.PORT;
+const PORT = 3000 || process.env.PORT;
 
 //use morgan logger and bodyparser
 app.use(logger('dev'));
@@ -39,10 +39,13 @@ db.once("open", function() {
 });
 
 //these are the routes!
+
+
 // Main "/" Route. This will redirect the user to our rendered React application
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
+
 
 // Route to get all saved articles
 app.get("/api/saved", function(req, res) {
@@ -71,13 +74,7 @@ app.get("/api/saved", function(req, res) {
 //     res.render('error');
 // });
 
-
-// // Any non API GET routes will be directed to our React App and handled by React Router
-// app.get("*", function(req, res) {
-//   res.sendFile(__dirname + "/public/index.html");
-// });
-
-
-app.listen(function() {
-	console.log("Listening in PORT: " + PORT);
-})
+// Starting our express server
+app.listen(PORT, function () {
+    console.log("App listening on PORT: " + PORT);
+});

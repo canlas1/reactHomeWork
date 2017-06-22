@@ -1,9 +1,8 @@
 // Include the Main React Dependencies
-import React from "react"
-import ReactDOM from "react-dom"
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// Include the main Parent Component
-import Main from "./components/Main"
+import Main from './components/Main';
 
-// This code here allows us to render our main component (in this case Parent)
-ReactDOM.render(<Main/>, document.getElementById("app"));
+// Renders the contents according to the route page.
+ReactDOM.render(<Main />, document.getElementById("app"));
