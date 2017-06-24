@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 // Including the Link component from React Router to navigate within our application without full page reloads
 import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
-import Child1 from './children/Child1';
-import Child2 from './children/Child2';
+
+import Search from './children/Search';
+import Results from './children/Results';
+import Saved from './children/Saved';
 
 class Main extends Component {
   render() {
@@ -11,17 +13,20 @@ class Main extends Component {
       <Router>
         <div className="container">
             <div className="jumbotron">
-              <h2><strong>Which Child???</strong></h2>
-              <p><em>A journey through the whimsical world of React Routing</em></p>
+            <div className ="well"></div>
+              <h2><strong>NYT React HomeWork</strong></h2>
+              <p><em>Grab that Article with React</em></p>
               <hr />
               <p>
-                <Link to="/Child1"><button className="btn btn-primary btn-lg">Show Child #1</button></Link>
-                <Link to="/Child2"><button className="btn btn-danger btn-lg">Show Child #2</button></Link>
+                <Link to="/Search"><button className="btn btn-primary btn-lg">Search NY Times Arcticle</button></Link>
+                <Link to="/Results"><button className="btn btn-danger btn-lg">Results of Search</button></Link>
+                <Link to="/Saved"><button className="btn btn-danger btn-lg">Save that Bitch</button></Link>
               </p>
             </div>
             <div className="row">
-              <Route path="/Child1" component={Child1}/>
-              <Route path="/Child2" component={Child2}/>
+              <Route path="/Search" component={Search}/>
+              <Route path="/Results" component={Results}/>
+              <Route path="/Saved" component={Saved}/>
             </div>
         </div>
       </Router>

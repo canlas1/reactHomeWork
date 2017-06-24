@@ -4,7 +4,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
-const Article = require("./models/Article.js");
+
 const PORT = 3000 || process.env.PORT;
 
 //use morgan logger and bodyparser
@@ -18,6 +18,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Serves static content for the app from the "public" directory
 app.use(express.static(process.cwd() + "/public"));
 
+const Article = require("./models/Article.js");
 
 //mongoose connection
 let db = mongoose.connection;
@@ -47,19 +48,35 @@ app.get("/", function(req, res) {
 });
 
 
-// Route to get all saved articles
-app.get("/api/saved", function(req, res) {
+// // Route to get all saved articles
+// app.get("/api/saved", function(req, res) {
 
-  Article.find({})
-    .exec(function(err, doc) {
+//   Article.find({})
+//     .exec(function(err, doc) {
 
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.send(doc);
-      }
-    });
+//       if (err) {
+//         console.log(err);
+//       }
+//       else {
+//         res.send(doc);
+//       }
+//     });
+// });
+
+// Route to add an article to saved list
+app.post("/api/saved", function(req, res) {
+  var newArticle = new Article(req.body);
+
+  console.log(req.body);
+
+  newArticle.save(function(err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
 });
 
 
