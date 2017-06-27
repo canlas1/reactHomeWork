@@ -36,44 +36,16 @@ class Search extends React.Component {
   render() {
     console.log("Render Results", this.state.results);
 
-    return (<div className="panel panel-default">
-                <div className="panel-heading">
-                    <h3 className="panel-title text-center">Query</h3>
-                </div>
-                <div className="panel-body text-center">
-                    <form onSubmit={this.runQuery.bind(this)}>
-                        <div className="form-group">
-                            <h4 className="">
-                                <strong>Location</strong>
-                            </h4>
+    return (  
+    <div className="main-container">
 
-                            {/*
-                             Note how each of the form elements has an id that matches the state.
-                             This is not necessary but it is convenient.
-                             Also note how each has an onChange event associated with our setQuery event.
-                             */}
-                            <input
-                                value={this.state.term}
-                                type="text"
-                                className="form-control text-center"
-                                id="term"
-                                onChange={this.setQuery.bind(this)}
-                                required
-                            />
-                            <br />
-                            <button
-                                className="btn btn-primary"
-                                type="submit"
-                            >
-                                Submit
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        );
-    }
-}
-
+        {/* Note how we pass the setQuery function to enable Query to perform searches */}
+        <Query updateSearch={this.setQuery} />
+        {/* Note how we pass in the results into this component */}
+        <Results results={this.state.results} />
+      </div>
+    );
+  }
+};
 // Export the component back for use in other files
 export default Search;

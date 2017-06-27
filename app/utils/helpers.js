@@ -7,12 +7,12 @@ export default {
     //function will start to query NYT API via axios
     runQuery(q, begin_date, end_date) {
         const newYorkTimesAPI = "defcdcfdde634a5d8c8bd2fd522eef32";
-        let formattedQuery = q.trim();
-        let formattedBegin = begin_date.trim();
-        let formattedEnd = end_date.trim()
-        let apiResults = response.data.results;
+        const formattedQuery = q.trim();
+        const formattedBegin = begin_date.trim();
+        const formattedEnd = end_date.trim()
+        const apiResults = response.data.results;
 
-        let queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${newYorkTimesAPI}&${formmattedQuery}`
+        const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${newYorkTimesAPI}&${formmattedQuery}`
 
         console.log('PLEASE WORK QUERY PLEASE!');
 

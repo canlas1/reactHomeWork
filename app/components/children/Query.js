@@ -4,14 +4,24 @@ import React, { Component } from 'react';
 class Query extends React.Component {
 	
 	// SET INITIAL STATE
-	constructor(props) {
-		super(props);
-		this.state = {term: ""}
-	}
+	getInitialState() {
+    return {
+      search: "",
+      start: "",
+      end: ""
+    };
+  }
 
+//changes in textbox
 	handleChange(event) {
 
+
+		//create capture syntax
+
         this.setState({term: event.target.value});
+        let newState = {};
+        newState[event.target.id] = event.target.value;
+        this.setState(newState);
 
     }
 
@@ -20,52 +30,89 @@ class Query extends React.Component {
         // prevent the HTML from trying to submit a form if the user hits "Enter" instead of
         // clicking the button
         event.preventDefault();
+        console.log("CCLCLLLLLICCCKKKED")
 
         // Set the parent to have the search term
-        this.props.setTerm(this.state.term);
-        this.setState({term: ""});
-    }
-
+        this.props.updateSearch(
+	        this.state.search, 
+	    	this.state.start, 
+	    	this.state.end
+    	);
+  }
     // Here we describe this component's render method
     render() {
         return (
-            <div className="panel panel-default">
-                <div className="panel-heading">
-                    <h3 className="panel-title text-center">Query</h3>
-                </div>
-                <div className="panel-body text-center">
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <div className="form-group">
-                            <h4 className="">
-                                <strong>Location</strong>
-                            </h4>
+            <div className="main-container">
 
-                            {/*
-                             Note how each of the form elements has an id that matches the state.
-                             This is not necessary but it is convenient.
-                             Also note how each has an onChange event associated with our handleChange event.
-                             */}
-                            <input
-                                value={this.state.term}
-                                type="text"
-                                className="form-control text-center"
-                                id="term"
-                                onChange={this.handleChange.bind(this)}
-                                required
-                            />
-                            <br />
-                            <button
-                                className="btn btn-primary"
-                                type="submit"
-                            >
-                                Submit
-                            </button>
-                        </div>
-                    </form>
-                </div>
+        <div className="row">
+          <div className="col-lg-12">
+
+            <div className="jumbotron">
+              <div className="panel-heading">
+                <h1 className="panel-title">
+                  <strong>
+                     Query
+                  </strong>
+                </h1>
+              </div>
+              <div className="panel-body">
+
+                {/* Note how we associate the text-box inputs with the state values */}
+                <form onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <h4 className=""><strong>Topic</strong></h4>
+                    <input
+                      type="text"
+                      value={this.state.search}
+                      className="form-control"
+                      id="search"
+                      onChange={this.handleChange}
+                      required
+                    />
+
+                    <h4><strong>Start Year</strong></h4>
+                    <input
+                      type="number"
+                      value={this.state.start}
+                      className="form-control"
+                      id="start"
+                      onChange={this.handleChange}
+                      required
+                    />
+
+                    <h4><strong>End Year</strong></h4>
+
+                    <input
+                      type="number"
+                      value={this.state.end}
+                      className="form-control"
+                      id="end"
+                      onChange={this.handleChange}
+                      required
+                    />
+
+                  </div>
+
+                  {/* Here we create the onClick event that triggers the HandleSubmit */}
+                  <div className="pull-right">
+                    <button
+                      type="submit"
+                      className="btn btn-danger"
+                    >
+                      <h4>Submit</h4>
+                    </button>
+                  </div>
+                </form>
+
+              </div>
             </div>
-        );
-    }
-}
+
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
+
 
 export default Query;
