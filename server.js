@@ -7,6 +7,9 @@ const app = express();
 
 const PORT = 3000 || process.env.PORT;
 
+// Set mongoose to leverage built in JavaScript ES6 Promises
+mongoose.Promise = Promise;
+
 //use morgan logger and bodyparser
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -19,7 +22,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static(process.cwd() + "/public"));
 
 const Article = require("./models/Article.js");
-
+console.log("DENNIS TEST Article!!!!" +  Article);
 //mongoose connection
 let db = mongoose.connection;
 
@@ -39,57 +42,15 @@ db.once("open", function() {
     console.log("Mongoose connection successful.");
 });
 
-//these are the routes!
+//these are the SERVER SIDE routes!
+require("./routes/api-routes")(app);
 
 
-// Main "/" Route. This will redirect the user to our rendered React application
-app.get("/", function(req, res) {
+
+app.get("*", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-
-// // Route to get all saved articles
-// app.get("/api/saved", function(req, res) {
-
-//   Article.find({})
-//     .exec(function(err, doc) {
-
-//       if (err) {
-//         console.log(err);
-//       }
-//       else {
-//         res.send(doc);
-//       }
-//     });
-// });
-
-// Route to add an article to saved list
-app.post("/api/saved", function(req, res) {
-  var newArticle = new Article(req.body);
-
-  console.log(req.body);
-
-  newArticle.save(function(err, doc) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.send(doc);
-    }
-  });
-});
-
-
-// // error handler
-// app.use(function(err, req, res, next) {
-//     // set locals, only providing error in development
-//     res.locals.message = err.message;
-//     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//     // render the error page
-//     res.status(err.status || 500);
-//     res.render('error');
-// });
 
 // Starting our express server
 app.listen(PORT, function () {
